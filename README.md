@@ -1,8 +1,43 @@
-# React + Vite
+# 🚗 Auto Showcase App  
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Una aplicación web para explorar modelos de autos con detalles, filtros y una interfaz moderna.  
 
-Currently, two official plugins are available:
+## 🛠️ Tecnologías Utilizadas  
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- ⚡ **Vite + React** — 
+- 🚦 **React Router** —  
+- 🎨 **Styled Components** —  
+- 🔄 **Axios** —  
+
+## 📦 Instalación y Uso  
+
+### 1️⃣ Clonar el repositorio  
+Abre una terminal y ejecuta el siguiente comando:  
+
+```sh
+git clone https://github.com/JuanHerrero28/auto-showcase.git
+cd auto-showcase
+
+
+### 2️⃣ Instalar dependencias
+
+Usando pnpm:
+```sh
+pnpm install
+
+O con npm:
+```sh
+npm install
+
+### 3️⃣ Ejecutar la aplicación en modo desarrollo con Vite
+
+pnpm dev
+
+O con npm:
+
+npm run dev
+
+La aplicación estará disponible en http://localhost:5173.
+
+🔗 API utilizada
+La aplicación obtiene datos desde https://challenge.egodesign.dev/api/models.
