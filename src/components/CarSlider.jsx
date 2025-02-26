@@ -44,18 +44,9 @@ const StyledSwiper = styled(Swiper)`
 
   .swiper-pagination {
     bottom: 1px;
+    
   }
 
-  /* Ocultar flechas en móviles */
-  @media (max-width: 768px) {
-    .swiper-button-next,
-    .swiper-button-prev {
-      visibility: hidden;
-      opacity: 0;
-      pointer-events: none;
-    }
-
-  /* Estilo de los puntos */
   .swiper-pagination-bullet {
     width: 8px;
     height: 8px;
@@ -68,6 +59,14 @@ const StyledSwiper = styled(Swiper)`
     background: #373737;
     opacity: 1;
   }
+  @media (max-width: 768px) {
+    .swiper-button-next,
+    .swiper-button-prev {
+      visibility: hidden;
+      opacity: 0;
+      pointer-events: none;
+    }
+
 `;
 
 const SlideItem = styled.div`
