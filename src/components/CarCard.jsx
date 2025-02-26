@@ -1,37 +1,44 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
-const Card = styled.div`
-  width: 269px;
-  height: 216px;
-  text-align: center;
-  border: 2px solid transparent;
-  padding: 10px;
-  border-radius: 8px;
-  transition: all 0.3s ease-in-out;
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-color: white;
+const fadeIn = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { duration: 0.8, ease: "easeOut" } },
+};
 
-  ${({ selected }) =>
-    selected &&
-    `
-    border-color: blue;
-  `}
+const Card = motion(
+  styled.div`
+    width: 269px;
+    height: 216px;
+    text-align: center;
+    border: 2px solid transparent;
+    padding: 10px;
+    border-radius: 8px;
+    transition: all 0.3s ease-in-out;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
 
-  &:hover h2 {
-    color: red;
-  }
+    ${({ selected }) =>
+      selected &&
+      `
+      border-color: blue;
+    `}
 
-  &:hover .cta-button {
-    opacity: 1;
-    
-  }
-`;
+    &:hover h2 {
+      color: red;
+    }
+
+    &:hover .cta-button {
+      opacity: 1;
+    }
+  `
+);
 
 const CarImage = styled.img`
   width: 216px; 
@@ -76,7 +83,7 @@ const Button = styled.button`
 const CarCard = ({ car, selected, onSelect }) => {
   const navigate = useNavigate();  // Hook de navegación de React Router
   return (
-    <Card selected={selected} onClick={() => onSelect(car.id)}>
+    <Card selected={selected} onClick={() => onSelect(car.id)} initial="hidden" animate="visible" variants={fadeIn}>
       <CarName>{car.name}</CarName>
       <CarDetails>
         {car.year} | ${car.price.toLocaleString()}

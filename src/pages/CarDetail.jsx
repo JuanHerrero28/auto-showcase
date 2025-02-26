@@ -4,8 +4,15 @@ import { useAutoContext } from "../context/AutoContext";
 import { Orbit } from "@uiball/loaders";
 import styled from "styled-components";
 import CarSlider from "../components/CarSlider";
+import { motion } from "framer-motion";
 
-const PageContainer = styled.div`
+
+const fadeIn = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { duration: 0.8, ease: "easeOut" } },
+};
+
+const PageContainer = motion(styled.div`
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   gap: 20px;
@@ -16,7 +23,7 @@ const PageContainer = styled.div`
     gap: 10px;
     padding: 10px;
   }
-`;
+`);
 
 const SectionWrapper = styled.div`
   display: flex;
@@ -25,7 +32,6 @@ const SectionWrapper = styled.div`
   grid-column: span 12;
   padding: 20px;
   gap: 20px;
-  
 
   @media (max-width: 768px) {
     margin-top: 70px;
@@ -49,7 +55,7 @@ const SectionImageContainer = styled.div`
 `;
 
 const SectionOne = styled.div`
-margin-top: 20px;
+  margin-top: 20px;
   flex: 1;
 
   h1 {
@@ -62,7 +68,6 @@ margin-top: 20px;
   h2 {
     font-size: 24px;
     color: #373737;
-    
   }
 
   p {
@@ -142,6 +147,7 @@ const SectionImageContainer3 = styled.div`
     img {
       width: 345px;
     }
+  } // <-- Faltaba este cierre
 `;
 
 const SectionThree = styled.div`
@@ -168,7 +174,6 @@ const SectionThree = styled.div`
     p {
       font-size: 14px;
     }
-
   }
 `;
 
@@ -224,7 +229,7 @@ const LoadingText = styled.p`
 const MIN_LOADING_TIME = 1500;
 
 const CarDetail = () => {
-// Extraemos el parámetro de la URL para identificar el auto a visualizar.
+  // Extraemos el parámetro de la URL para identificar el auto a visualizar.
   const { id } = useParams();
   // Obtenemos el estado global y la función para obtener detalles del auto desde el contexto.
   const { state, fetchCarDetails } = useAutoContext();
@@ -237,16 +242,16 @@ const CarDetail = () => {
     const startTime = Date.now(); // Guardamos el tiempo de inicio para calcular el tiempo transcurrido.
 
     const loadCar = async () => {
-        // Solo realizamos la petición si los datos del auto aún no están en el estado global.
+      // Solo realizamos la petición si los datos del auto aún no están en el estado global.
       if (!car) {
         const data = await fetchCarDetails(id);
         setCar(data);
       }
-    
+
       // Calculamos el tiempo restante para cumplir con el tiempo mínimo de carga.
       const elapsedTime = Date.now() - startTime;
       const remainingTime = Math.max(MIN_LOADING_TIME - elapsedTime, 0);
-     
+
       // Usamos un timeout para garantizar una animación de carga fluida si la respuesta es muy rápida.
       setTimeout(() => setLoading(false), remainingTime);
     };
@@ -262,16 +267,16 @@ const CarDetail = () => {
         <LoadingText>Cargando ficha técnica...</LoadingText>
       </SpinnerContainer>
     );
-    // Manejo del caso en que no se encuentre el auto.
+  // Manejo del caso en que no se encuentre el auto.
   if (!car) return <p>Auto no encontrado</p>;
 
   return (
-    <PageContainer>
-      <SectionWrapper>
-        <SectionImageContainer>
+    <PageContainer initial="hidden" animate="visible" variants={fadeIn}>
+      <SectionWrapper variants={fadeIn}>
+        <SectionImageContainer variants={fadeIn}>
           <img src={car.photo} alt={car.name} />
         </SectionImageContainer>
-        <SectionOne>
+        <SectionOne variants={fadeIn}>
           <h2>{car.name}</h2>
           <h1>{car.title}</h1>
           <p dangerouslySetInnerHTML={{ __html: car.description }}></p>
@@ -282,7 +287,7 @@ const CarDetail = () => {
         <CarSlider />
       </FullWidthSection>
       <Container>
-        <SectionOrder>
+        <SectionOrder variants={fadeIn}>
           <SectionThree className="second-child">
             <h3>Puntos destacados</h3>
             <p>Algunas de las características más relevantes del modelo.</p>
@@ -295,7 +300,7 @@ const CarDetail = () => {
           </SectionImageContainer3>
         </SectionOrder>
 
-        <SectionOrder2>
+        <SectionOrder2 variants={fadeIn}>
           <SectionImageContainer3 className="second-child">
             <img
               src={car.model_highlights[1].image}
