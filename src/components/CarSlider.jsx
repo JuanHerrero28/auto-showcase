@@ -44,7 +44,6 @@ const StyledSwiper = styled(Swiper)`
 
   .swiper-pagination {
     bottom: 1px;
-    
   }
 
   .swiper-pagination-bullet {
@@ -59,6 +58,7 @@ const StyledSwiper = styled(Swiper)`
     background: #373737;
     opacity: 1;
   }
+
   @media (max-width: 768px) {
     .swiper-button-next,
     .swiper-button-prev {
@@ -66,8 +66,9 @@ const StyledSwiper = styled(Swiper)`
       opacity: 0;
       pointer-events: none;
     }
-
+  }
 `;
+
 
 const SlideItem = styled.div`
   display: flex;
